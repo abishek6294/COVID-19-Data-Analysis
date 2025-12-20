@@ -25,21 +25,7 @@ class NYTCovid:
     def today(self):
         print("Today is:",self._today)
     
-    def updateState(self,
-                     url="https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"):
-        url = url
-        s=requests.get(url).content
-        self.statedf = pd.read_csv(io.StringIO(s.decode('utf-8')))
-        self.statedf['date'] =  pd.to_datetime(self.statedf['date'], format='%Y-%m-%d')
-        self._stateupdated = True
-    
-    def updateCounty(self,
-                     url="https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv"):
-        url = url
-        s=requests.get(url).content
-        self.countydf = pd.read_csv(io.StringIO(s.decode('utf-8')))
-        self.countydf['date'] =  pd.to_datetime(self.countydf['date'], format='%Y-%m-%d')
-        self._countyupdated = True
+   
     
     def dateUpdate(self):
         if self._stateupdated:
@@ -249,4 +235,5 @@ class NYTCovid:
                 color='orange',edgecolor='k')
         axs[3].set_title("New deaths on {}".format(str(d)),
                         fontsize=15)
+
         plt.show()
